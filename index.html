@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>Bloom & Bury Demo</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color:black;
+      overflow: hidden;
+      
+    }
+    
+    @font-face {
+      font-family: 'Comicoro';
+      src: url(Visual/Fonts/Comicoro.ttf);
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Piacevoli';
+      src: url(Visual/Fonts/Piacevoli.ttf);
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'LittleArrows';
+      src: url(Visual/Fonts/LittleArrows.otf);
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'EarlyGameBoy';
+      src: url(Visual/Fonts/EarlyGameBoy.ttf);
+      font-weight: normal;
+      font-style: normal;
+    }
+
+       #canvas--main,    
+       #canvas--top {
+      /* zoom: 2; */
+      background-color:transparent;
+      position: absolute;
+      border-left: 4px solid black;
+      border-right: 4px solid black;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      margin-left: 0 auto;
+      margin-right: 0 auto;
+      margin-top: 0 auto;
+      margin-bottom: 0 auto;
+      height: 100vw;      
+      width: auto;       /*  za 4:3 ratio */
+      max-height: 100vh;  /* ne prelazi visinu ekrana */
+      aspect-ratio: 4 / 3;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      
+    }
+
+
+
+
+    .assets {
+      display: none;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="game">
+    <canvas id="canvas--main"></canvas>
+    <canvas id="canvas--top"></canvas>
+  <div>
+
+  <div class="assets">
+    <!-- HERO -->
+    <img src="./Visual/Characters/Hero/Deda_BOBB.png" id="hero-initial"/>
+    <img src="./Visual/Characters/Hero/Deda_SLBB.png" id="hero-day-shovel-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SLBBD.png" id="hero-day-shovel-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SSBB.png" id="hero-day-axe-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SSBBD.png" id="hero-day-axe-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SLSB.png" id="hero-night-shovel-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SLSBD.png"id="hero-night-shovel-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SSSB.png" id="hero-night-axe-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SSSBD.png" id="hero-night-axe-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SKSB.png" id="hero-night-scythe-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SKSBD.png" id="hero-night-scythe-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SKBB.png" id="hero-day-scythe-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SKBBD.png" id="hero-day-scythe-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SCSB.png" id="hero-night-hammer-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SCSBD.png" id="hero-night-hammer-true"/>
+    <img src="./Visual/Characters/Hero/Deda_SCBB.png" id="hero-day-hammer-false"/>
+    <img src="./Visual/Characters/Hero/Deda_SCBBD.png" id="hero-day-hammer-true"/>
+    
+    <!-- ZOMBIES -->
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa1.png" id="zombie-sprite-alpha-false"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa1_D.png" id="zombie-sprite-alpha-true"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa2.png" id="zombie-sprite-beta-false"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa2_D.png" id="zombie-sprite-beta-true"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa3.png" id="zombie-sprite-gamma-false"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa3_D.png" id="zombie-sprite-gamma-true"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa4.png" id="zombie-sprite-delta-false"/>
+    <img src="./Visual/Characters/Zombies/Zombi_Klasa4_D.png" id="zombie-sprite-delta-true"/>
+
+    <!-- NPCs -->
+    <img src="./Visual/Characters/NPCs/Davitelj_NPC.png" id="npc-sprite-pierre"/>
+    <img src="./Visual/Characters/NPCs/Gaga_NPC.png" id="npc-sprite-john"/>
+    <img src="./Visual/Characters/NPCs/Leptirica_NPC.png" id="npc-sprite-jolene"/>
+    <img src="./Visual/Characters/NPCs/Mrtvac_NPC.png" id="npc-sprite-mortimer"/>
+    <img src="./Visual/Characters/NPCs/Svestenik_NPC.png" id="npc-sprite-father gabriel"/>
+    <img src="./Visual/Characters/NPCs/Sejtan_NPC.png" id="npc-sprite-stanley"/>
+    <img src="./Visual/Characters/NPCs/Toza_NPC.png" id="npc-sprite-thomas"/>
+    <img src="./Visual/Characters/NPCs/Variola_NPC.png" id="npc-sprite-dr adder"/>
+
+    <!-- DEMON -->
+    <img src="./Visual/Characters/Demon/Demon_Sprite.png" id="demon-sprite-false"/>
+    <img src="./Visual/Characters/Demon/Demon_Sprite_D.png" id="demon-sprite-true"/>
+    <img src="./Visual/Characters/Demon/Munja.png" id="lightning-bolt-sprite"/>
+    <img src="./Visual/Characters/Demon/Kugla.png" id="lightning-ball-sprite"/>
+    
+    <!-- CROW -->
+    <img src="./Visual/Characters/Crow/Vrana.png" id="crow-sprite"/>
+    
+    <!-- SCARECROW -->
+    <img src="./Visual/Characters/Scarecrow/SpecItem_Strasilo.png" id="item-sprite-scarecrow"/>
+
+    <!-- MAP -->
+    <img src="./Visual/Map/Layers/Mapa_v3_Back_Day.png" id="background-day" />
+    <img src="./Visual/Map/Layers/Mapa_v3_Fore_Day.png" id="foreground-day" />
+    <img src="./Visual/Map/Layers/Mapa_v3_Back_Night.png" id="background-night" />
+    <img src="./Visual/Map/Layers/Mapa_v3_Fore_Night.png" id="foreground-night" />
+    
+    <!-- GATES -->
+    <!--1. this.isLocked  2. this.game.isNight -->
+    <img src="./Visual/Map/Gates/Kapija_Drvena_ClosedDay.png" id="gate-wood-back-true-false" />
+    <img src="./Visual/Map/Gates/Kapija_Drvena_ClosedNight.png" id="gate-wood-back-true-true" />
+    <img src="./Visual/Map/Gates/Kapija_Drvena_OpenDay.png" id="gate-wood-back-false-false" />
+    <img src="./Visual/Map/Gates/Kapija_Drvena_OpenNight.png" id="gate-wood-back-false-true" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_OpenDay_Background.png" id="gate-steel-back-false-false" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_OpenNight_Background.png" id="gate-steel-back-false-true" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_ClosedDay_Background.png" id="gate-steel-back-true-false" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_ClosedNight_Background.png" id="gate-steel-back-true-true" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_OpenDay_Foreground.png" id="gate-steel-fore-false-false" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_OpenNight_Foreground.png" id="gate-steel-fore-false-true" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_ClosedDay_Foreground.png" id="gate-steel-fore-true-false" />
+    <img src="./Visual/Map/Gates/Kapija_Metalna_ClosedNight_Foreground.png" id="gate-steel-fore-true-true" />
+    
+    <!-- ARENA -->
+    <img src="./Visual/Map/Arena/Arena_Sheet.png" id="arena-sprite-day" />
+    <img src="./Visual/Map/Arena/Arena_Sheet_Noc.png" id="arena-sprite-night" />
+    
+    <!-- RAIN -->
+    <img src="./Visual/Map/Rain/Kisa_Sprite.png" id="rain-sprite" />
+
+    <!-- FONTAINS -->
+    <img src="./Visual/Map/Fontains/Fontana_Anim_Dan.png" id="fontain-sprite-day" />
+    <img src="./Visual/Map/Fontains/Fontana_Anim_Mrak.png" id="fontain-sprite-night" />
+    
+    <!-- HUD -->
+    <!-- CLUSTERS -->
+    <img src="./Visual/HUD/Clusters/HUD_Klasteri_Dan.png" id="hud-day" />
+    <img src="./Visual/HUD/Clusters/HUD_Klasteri_Noc.png" id="hud-night" />
+    <img src="./Visual/HUD/Clusters/HUD_Master.png" id="hud-master" />
+    <img src="./Visual/HUD/Clusters/HUD_Klasteri_HB Ram.png" id="hud-health-frame" />
+    <img src="./Visual/HUD/Clusters/HUD_Dijalog.png" id="hud-dialog" />
+    <img src="./Visual/HUD/Clusters/HUD_Demon_Master.png" id="hud-demon-master" />
+    <img src="./Visual/HUD/Clusters/HUD_Demon_HB Ram.png" id="hud-demon-health-frame" />
+    <img src="./Visual/HUD/Clusters/HUD_Demon_Icon.png" id="hud-demon-icon" />
+     
+     <!-- WEAPONS -->
+    <img src="./Visual/HUD/Weapons/HUD_Orudje_Lopata.png" id="hud-weapon-shovel" />
+    <img src="./Visual/HUD/Weapons/HUD_Orudje_Cekic.png" id="hud-weapon-hammer" />
+    <img src="./Visual/HUD/Weapons/HUD_Orudje_Sekira.png" id="hud-weapon-axe" />
+    <img src="./Visual/HUD/Weapons/HUD_Orudje_Kosa.png" id="hud-weapon-scythe" />
+
+    <!-- ITEMS -->
+    <!-- hud-item-item name - can be found  -->
+    <img src="./Visual/HUD/Items/HUD_Itemi_Flasa silueta.png" id="hud-item-bottle-available" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Sat silueta.png" id="hud-item-hourglass-available" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Strasilo silueta.png" id="hud-item-scarecrow-available" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Sveca silueta.png" id="hud-item-candle-available" />
+    <!-- isFilled -->
+    <img src="./Visual/HUD/Items/HUD_Itemi_Flasa prazna.png" id="hud-item-bottle-available-false" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Flasa puna.png" id="hud-item-bottle-available-true" />
+    <!-- roseCounter>=50 -->
+    <img src="./Visual/HUD/Items/HUD_Itemi_Sat prazan.png" id="hud-item-hourglass-available-false" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Sat pun.png" id="hud-item-hourglass-available-true" />
+    <!-- isFound-->
+    <img src="./Visual/HUD/Items/HUD_Itemi_Strasilo.png" id="hud-item-scarecrow-available-true" />
+    <!-- isFound-->
+    <img src="./Visual/HUD/Items/HUD_Itemi_Sveca.png" id="hud-item-candle-available-true" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Okvir.png" id="hud-item-selected" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Srebrni Kljuc.png" id="hud-item-key-silver" />
+    <img src="./Visual/HUD/Items/HUD_Itemi_Zlatni Kljuc.png" id="hud-item-key-gold" />
+        <!-- JOURNAL -->
+    <img src="./Visual/HUD/Journal/HUD_Journal_Static_Open.png" id="journal-opened" />
+    <img src="./Visual/HUD/Journal/HUD_Journal_Static.png" id="journal-closed" />
+
+    <!-- MENU -->
+    <!-- INTRO SCREEN -->
+    <img src="./Visual/Menu/Intro Screen/Intro Screen.png" id="intro-press-a" />
+    <img src="./Visual/Menu/Intro Screen/WarDucks_Logo_Intro.png" id="war-ducks-intro" />
+
+    <!-- JOURNAL -->
+    <img src="./Visual/Menu/Journal/Journal.png" id="journal-menu" />
+
+       
+    <!-- MAIN MENU -->
+    <img src="./Visual/Menu/Main Menu/Background.png" id="main-background" />
+    <img src="./Visual/Menu/Main Menu/Logo.png" id="main-logo" />
+    <img src="./Visual/Menu/Main Menu/WarDucks_Logo_wAlpha.png" id="war-ducks-logo" />
+    <img src="./Visual/Menu/Main Menu/Puzavice.png" id="main-flowers" />
+    <img src="./Visual/Menu/Main Menu/Ruza_Menu.png" id="main-rose" />
+    <img src="./Visual/Menu/Main Menu/Grobovi_NoContinue.png" id="main-new" />
+    <img src="./Visual/Menu/Main Menu/Grobovi_Svi.png" id="main-continue" />
+    <img src="./Visual/Menu/Main Menu/Strelica_Bela_Gore.png" id="arrow-up-white" />
+    <img src="./Visual/Menu/Main Menu/Strelica_Bela_Dole.png" id="arrow-down-white" />
+    <img src="./Visual/Menu/Main Menu/Strelica_Crna_Gore.png" id="arrow-up-black" />
+    <img src="./Visual/Menu/Main Menu/Strelica_Crna_Dole.png" id="arrow-down-black" />
+    
+    <!-- PAUSE MENU -->
+    <img src="./Visual/Menu/Pause Menu/Pause Menu_Box.png" id="pause-background" />
+    <img src="./Visual/Menu/Pause Menu/Pause Menu_Text Placeholder.png" id="pause-placeholder" />
+
+
+    <!-- MISC -->
+    <img src="./Visual/Misc/Roses/Keeper of the Graveyard_Rose Z 16x16.png" id="rose-image-zombie"/>
+    <img src="./Visual/Misc/Roses/Keeper of the Graveyard_Rose S 16x16.png" id="rose-image-flowerpot"/>
+    <img src="./Visual/Misc/Candles/Keeper of the Graveyard_Sveca 1.png" id="candle-image-end"/>
+    <img src="./Visual/Misc/Candles/Keeper of the Graveyard_Sveca 2.png" id="candle-image-half"/>
+    <img src="./Visual/Misc/Candles/Keeper of the Graveyard_Sveca 3.png" id="candle-image-full"/>
+    <img src="./Visual/Misc/Letter/Pismo.png" id="letter"/>
+</div>
+<script src="main.js" type="module"></script>
+
+</body>
+</html>
+
+

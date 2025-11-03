@@ -1,0 +1,17 @@
+{
+  "name": "bloomnbury",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@parcel/transformer-raw": "^2.16.0",
+    "flatted": "^3.3.3",
+    "howler": "^2.2.4",
+    "parcel": "^2.16.0"
+  }
+}

@@ -1,0 +1,52 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Mapa_v3.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Mapa_v3.tmx": {
+            "scale": 3,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 873.1666666666665,
+                "y": 1960.1666666666665
+            }
+        },
+        "Mapa_v3_Mustra.tsx": {
+            "scaleInDock": 0.125,
+            "scaleInEditor": 1
+        },
+        "Tileset_Dan.tsx": {
+            "scaleInDock": 4,
+            "scaleInEditor": 5.5
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/aleks/OneDrive/Desktop/Me/Games Untold/Keeper of the Graves/Project/Tiled",
+    "last.imagePath": "C:/Users/aleks/OneDrive/Desktop/Me/Games Untold/Keeper of the Graves/_REND/Tilemap/Map/_Final/Tiled",
+    "map.height": 128,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 128,
+    "openFiles": [
+        "Mapa_v3.tmx",
+        "Tileset_Dan.tsx",
+        "Mapa_v3_Mustra.tsx"
+    ],
+    "project": "Mapa_v3.tiled-project",
+    "recentFiles": [
+        "Mapa_v3_Mustra.tsx",
+        "Tileset_Dan.tsx",
+        "Mapa_v3.tmx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
