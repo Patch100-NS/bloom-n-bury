@@ -45,12 +45,12 @@ export class Input {
         this.actionKeyPressed('3');
       } else if (e.key.toLocaleLowerCase() === '4') {
         this.actionKeyPressed('4');
-      } else if (e.key.toLocaleLowerCase() === 'r') {
-        this.game.graves.forEach(grave => {
-          if (grave.sector.name === this.game.currentSector) {
-            grave.isLocked = true;
-          }
-        });
+        // } else if (e.key.toLocaleLowerCase() === 'r') {
+        //   this.game.graves.forEach(grave => {
+        //     if (grave.sector.name === this.game.currentSector) {
+        //       grave.isLocked = true;
+        //     }
+        //   });
       } else if (
         e.key.toLocaleLowerCase() === 'p' ||
         e.key.toLocaleLowerCase() === 'escape'
@@ -84,17 +84,17 @@ export class Input {
           this.game.ui.mainMenu.selectedOption =
             this.game.ui.mainMenu.availableOptions[0];
         }
-      } else if (e.key.toLocaleLowerCase() === 'h') {
-        this.game.demon.health = 0;
-      } else if (e.key.toLocaleLowerCase() === 'n') {
-        if (this.game.isNight) {
-          this.game.clock = 6;
-        } else {
-          this.game.clock = 0;
-        }
-      } else if (e.key.toLocaleLowerCase() === 'g') {
-        this.game.godMode = !this.game.godMode;
-        this.game.hero.activateGod();
+        // } else if (e.key.toLocaleLowerCase() === 'h') {
+        //   this.game.demon.health = 0;
+        // } else if (e.key.toLocaleLowerCase() === 'n') {
+        //   if (this.game.isNight) {
+        //     this.game.clock = 6;
+        //   } else {
+        //     this.game.clock = 0;
+        //   }
+        // } else if (e.key.toLocaleLowerCase() === 'g') {
+        //   this.game.godMode = !this.game.godMode;
+        //   this.game.hero.activateGod();
         // } else if (e.key === '+') {
         //   this.game.timeAccelerator += 1000;
         // } else if (e.key === '-') {

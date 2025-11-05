@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel index.html",
+    "prebuild": "rm -rf dist",
     "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "",
