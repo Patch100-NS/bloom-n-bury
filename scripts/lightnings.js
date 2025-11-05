@@ -142,7 +142,6 @@ export class LightningBolt extends Lightning {
         this.game.checkRectCollision(this.target, this.game.hero.position)
       ) {
         if (!this.game.godMode && this.game.demon.health > 0) {
-          console.log('damage');
           this.game.hero.health--; //ok?
         }
         if (!this.hit.playing()) {
