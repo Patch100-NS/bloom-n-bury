@@ -1,4 +1,5 @@
 ﻿# bloom-n-bury
 
- Demo version available https://bloomnburydemo.netlify.app/
+ Demo version available at: https://bloomnburydemo.netlify.app/
+
 
